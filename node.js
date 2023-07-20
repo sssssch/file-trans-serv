@@ -29,6 +29,7 @@ app.post('/upload', upload.single('file'), (req, res) => {
   if (files.length > 5) {
     files.pop();
   }
+  console.log(`File ${decodedFileName} uploaded by ${ip} at ${uploadTime}`);
   res.redirect('/');
 });
 
@@ -69,6 +70,7 @@ app.get('/download/:name', (req, res) => {
       const ip = req.ip;
       const ipInfo = ipMap.get(encodedFileName);
       ipInfo.downloads.push(ip);
+      console.log(`File ${fileName} downloaded by ${ip} at ${new Date()}`);
       res.download(path, iconv.decode(Buffer.from(fileName, 'binary'), 'utf8'), () => {
         ;
       });
@@ -131,6 +133,7 @@ app.post('/clear', basicAuth({
     storageMap.clear();
     files.length = 0;
     ipMap.clear();
+    console.log('All files cleared by admin');
     res.redirect('/admin');
   });
 });

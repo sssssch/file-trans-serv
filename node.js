@@ -3,6 +3,7 @@ const multer = require('multer');
 const fs = require('fs');
 const iconv = require('iconv-lite');
 const basicAuth = require('express-basic-auth');
+const chardet = require('chardet');
 
 const app = express();
 const port = process.env.PORT || 5000;
@@ -17,7 +18,9 @@ app.use(express.static('public'));
 app.post('/upload', upload.single('file'), (req, res) => {
   const file = req.file;
   const fileName = file.originalname;
-  const encodedFileName = iconv.encode(fileName, 'utf8').toString('binary');
+  const encoding = chardet.detect(fileName);
+  const decodedFileName = iconv.decode(Buffer.from(fileName, 'binary'), encoding);
+  const encodedFileName = iconv.encode(decodedFileName, 'utf8').toString('binary');
   const uploadTime = new Date();
   const ip = req.ip;
   files.unshift({ name: encodedFileName, uploadTime, downloads: 0 });

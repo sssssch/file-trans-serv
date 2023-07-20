@@ -70,7 +70,7 @@ app.get('/download/:name', (req, res) => {
       const ipInfo = ipMap.get(encodedFileName);
       ipInfo.downloads.push(ip);
       res.download(path, iconv.decode(Buffer.from(fileName, 'binary'), 'utf8'), () => {
-        fs.unlinkSync(path);
+        ;
       });
     } else {
       res.sendStatus(404);

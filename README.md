@@ -33,18 +33,17 @@ The application uses the following dependencies:
 ## How to use
 
 ### run
+
 Use the start.sh, do `sh start.sh` to start this application
 
-### upload 
+### upload
+
 Use the commit.sh, do `sh commit.sh` to push it to github
 
 ### docker package
+
 Use the docker-start.sh, do `sh docker-start.sh` to run with docker
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Acknowledgments
-
-This project was inspired by the [File Upload and Download App](https://github.com/bradtraversy/node_file_uploader) by Brad Traversy.
